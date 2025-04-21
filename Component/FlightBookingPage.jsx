@@ -95,7 +95,7 @@ console.log(dummyResults,"result")
     >
       <div className="bg-[#0b0f2f]/90 min-h-screen">
         <header className="flex justify-between items-center bg-[#121c3d] px-4 py-3 md:px-6 md:py-4 shadow-lg sticky top-0 z-50">
-          <div className="text-lg md:text-xl font-extrabold text-white">Airveloz</div>
+          <div className="text-lg md:text-xl font-extrabold text-white">Airzelo</div>
           <nav className="hidden md:flex gap-4 md:gap-6 text-sm text-white font-medium">
             <a href="#" className="hover:text-blue-300">Home</a>
             <a href="#" className="hover:text-blue-300">My Bookings</a>
