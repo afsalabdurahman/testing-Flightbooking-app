@@ -11,7 +11,7 @@ const [menuOpen, setMenuOpen] = useState(false);
   const [tripType, setTripType] = useState('round');
   const [showPassportForm, setShowPassportForm] = useState(false);
   const [showPaymentPage, setShowPaymentPage] = useState(false);
-  const [errorSumTikets, setErrorSumTikets] = useState(false)
+  const [errorSumTikets, setErrorSumTikets] = useState(null)
   const [totalTikets, setTotalTikets] = useState({ adult: 1, child: 0, infant: 0 })
   const [dummyResults, setShowResultss] = useState([
     {
@@ -119,12 +119,17 @@ const [menuOpen, setMenuOpen] = useState(false);
     let total = Number(totalTikets.adult) + Number(totalTikets.child) + Number(totalTikets.infant)
   
     if (total > 9) {
-      setErrorSumTikets(true)
-
-    } else {
-      setErrorSumTikets(false)
-      setShowResults(true);
+      setErrorSumTikets("You can purchase a maximum of 9 tickets only.")
+      return false
     }
+    if(totalTikets.adult==0){
+      setErrorSumTikets("Must have at least one adult")
+      return false
+    }
+    
+       setErrorSumTikets(null)
+       setShowResults(true);
+    
 
   };
 
@@ -212,20 +217,20 @@ const [menuOpen, setMenuOpen] = useState(false);
                 <div class="grid grid-cols-3 gap-4">
                   <div>
                     <label class="text-xs">Adult</label>
-                    <input min="1" max="9" type='number' value={totalTikets.adult} onChange={(e) => adultCount(Number(e.target.value))} class="w-full border border-gray-300 rounded px-2 py-1" />
+                    <input min="1" max="9"  value={totalTikets.adult} onChange={(e) => adultCount(Number(e.target.value))} class="w-full border border-gray-300 rounded px-2 py-1" />
                   </div>
                   <div>
                     <label class="text-xs">Child</label>
-                    <input min="0" max="9" type='number' value={totalTikets.child} onChange={(e) => childCount(Number(e.target.value))} class="w-full border border-gray-300 rounded px-2 py-1" />
+                    <input min="0" max="9"  value={totalTikets.child} onChange={(e) => childCount(Number(e.target.value))} class="w-full border border-gray-300 rounded px-2 py-1" />
                   </div>
                   <div>
                     <label class="text-xs">Infant</label>
-                    <input min="0" max="9" type='number' value={totalTikets.infant} onChange={(e) => infantCount(Number(e.target.value))} class="w-full border border-gray-300 rounded px-2 py-1" />
+                    <input min="0" max="9"  value={totalTikets.infant} onChange={(e) => infantCount(Number(e.target.value))} class="w-full border border-gray-300 rounded px-2 py-1" />
 
                   </div>
                 </div>
                 {errorSumTikets ?
-                  <p class="text-red-600 text-sm font-medium">You can purchase a maximum of 9 tickets only.</p>
+                  <p class="text-red-600 text-sm font-medium">{errorSumTikets}</p>
                   : null}</div>
 
               {/* <label className="block text-sm font-medium text-gray-700">Passengers</label>
